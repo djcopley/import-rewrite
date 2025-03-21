@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "import-rewriter"
+version = "0.1.0"
+description = "Import rewriter"
+readme = "README.md"
+authors = [
+    { name = "Daniel Copley", email = "djcopley@proton.me" }
+]
+requires-python = ">=3.9"
+dependencies = []
