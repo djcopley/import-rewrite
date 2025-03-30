@@ -2,6 +2,12 @@
 
 A flexible library for dynamically rewriting Python imports at runtime using metapath hooks.
 
+[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
+[![Lint](https://github.com/djcopley/import-rewriter/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/djcopley/import-rewriter/actions/workflows/lint.yml)
+[![PyPI version](https://badge.fury.io/py/import-rewriter.svg)](https://badge.fury.io/py/import-rewriter)
+[![PyPI Supported Python Versions](https://img.shields.io/pypi/pyversions/import-rewriter.svg)](https://pypi.python.org/pypi/import-rewriter/)
+[![Downloads](https://static.pepy.tech/badge/import-rewriter)](https://pepy.tech/project/import-rewriter)
+
 ## Overview
 
 Import Rewriter allows you to transparently redirect imports in Python code without modifying the source. This is useful for:
