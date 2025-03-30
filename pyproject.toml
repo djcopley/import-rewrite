@@ -1,16 +1,59 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "import-rewriter"
-version = "0.1.0"
-description = "Import rewriter"
+description = """Rewrite imports"""
 readme = "README.md"
+license = { file = "LICENSE" }
+dynamic = ["version"]
 authors = [
-    { name = "Daniel Copley", email = "djcopley@proton.me" }
+    { name = "Daniel Copley", email = "djcopley@proton.me" },
 ]
 requires-python = ">=3.9"
-dependencies = [
-    "astroid"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
+dependencies = [
+    "astroid",
+]
+
+[project.urls]
+Homepage = "https://github.com/djcopley/import-rewriter"
+Repository = "https://github.com/djcopley/import-rewriter.git"
+Issues = "https://github.com/djcopley/import-rewriter/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+
+[tool.coverage.run]
+source = ["src/"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/*" = ["INP001", "ARG"]
