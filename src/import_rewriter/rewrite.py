@@ -46,7 +46,6 @@ class ImportTransformer(ast.NodeTransformer):
 class ImportRewritingFinder(importlib.abc.MetaPathFinder):
     def __init__(self, import_map: dict[str, str] | None = None) -> None:
         self.import_map = import_map or {}
-        self.processed_modules: set[str] = set()
 
     def find_spec(
         self,
@@ -54,9 +53,6 @@ class ImportRewritingFinder(importlib.abc.MetaPathFinder):
         path: Sequence[str | bytes] | None,
         target: types.ModuleType | None = None,  # noqa: ARG002
     ) -> importlib.machinery.ModuleSpec | None:
-        if fullname in self.processed_modules or fullname.startswith("_"):
-            return None
-
         if path is None:
             path = sys.path
 
@@ -70,10 +66,8 @@ class ImportRewritingFinder(importlib.abc.MetaPathFinder):
                     continue
 
                 loader = ImportRewritingLoader(fullname, filename, self.import_map)
-                spec = importlib.machinery.ModuleSpec(name=fullname, loader=loader, origin=filename, is_package=False)
 
-                self.processed_modules.add(fullname)
-                return spec
+                return importlib.machinery.ModuleSpec(name=fullname, loader=loader, origin=filename, is_package=False)
 
         return None
 

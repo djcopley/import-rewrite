@@ -56,10 +56,11 @@ extra-dependencies = [
 [tool.hatch.envs.types.scripts]
 check = [
     "mypy {args:src/import_rewriter}",
-    "mypy --explicit-package-bases tests"
+    "mypy --explicit-package-bases --ignore-missing-imports tests"
 ]
 
 [tool.pytest.ini_options]
+norecursedirs = "tests/resources"
 addopts = [
     "--import-mode=importlib",
 ]
@@ -78,3 +79,9 @@ exclude_lines = [
 
 [tool.ruff.lint.extend-per-file-ignores]
 "tests/*" = ["INP001", "ARG"]
+
+[tool.ruff]
+exclude = ["tests/resources/"]
+
+[tool.mypy]
+exclude = "tests/resources/"
