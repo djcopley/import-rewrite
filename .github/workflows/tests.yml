@@ -1,0 +1,34 @@
+name: Tests
+on:
+  push:
+  pull_request:
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test with ${{ matrix.py }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        py:
+          - "3.13"
+          - "3.12"
+          - "3.11"
+          - "3.10"
+          - "3.9"
+    steps:
+      - uses: pypa/hatch@install
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup python for test ${{ matrix.py }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.py }}
+      - name: Run test suite
+        run: hatch test -py=${{ matrix.py }}

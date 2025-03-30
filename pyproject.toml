@@ -30,6 +30,12 @@ dependencies = [
     "astroid",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest",
+    "mypy"
+]
+
 [project.urls]
 Homepage = "https://github.com/djcopley/import-rewriter"
 Repository = "https://github.com/djcopley/import-rewriter.git"
@@ -37,6 +43,21 @@ Issues = "https://github.com/djcopley/import-rewriter/issues"
 
 [tool.hatch.version]
 source = "vcs"
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+[tool.hatch.envs.types]
+template = "hatch-test"
+extra-dependencies = [
+    "mypy~=1.0",
+]
+
+[tool.hatch.envs.types.scripts]
+check = [
+    "mypy {args:src/import_rewriter}",
+    "mypy --explicit-package-bases tests"
+]
 
 [tool.pytest.ini_options]
 addopts = [
