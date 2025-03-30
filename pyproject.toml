@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "import-rewriter"
-description = """Rewrite imports"""
+description = """A flexible library for dynamically rewriting Python imports at runtime using metapath hooks."""
 readme = "README.md"
 license = { file = "LICENSE" }
 dynamic = ["version"]
