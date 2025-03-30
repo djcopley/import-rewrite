@@ -11,4 +11,6 @@ authors = [
     { name = "Daniel Copley", email = "djcopley@proton.me" }
 ]
 requires-python = ">=3.9"
-dependencies = []
+dependencies = [
+    "astroid"
+]

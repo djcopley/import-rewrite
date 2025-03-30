@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 
+# JJ VCS
+.jj
+
 # Virtual environments
 .venv
 
