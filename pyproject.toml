@@ -27,13 +27,14 @@ classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 dependencies = [
-    "astroid",
+    "astroid~=3.0",
 ]
 
 [dependency-groups]
 dev = [
     "pytest",
-    "mypy"
+    "mypy",
+    "ruff",
 ]
 
 [project.urls]
@@ -44,20 +45,15 @@ Issues = "https://github.com/djcopley/import-rewriter/issues"
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.envs.types]
+dependencies = [
+    "mypy",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy {args:src/import_rewriter}"
+
 [[tool.hatch.envs.hatch-test.matrix]]
 python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
-
-[tool.hatch.envs.types]
-template = "hatch-test"
-extra-dependencies = [
-    "mypy~=1.0",
-]
-
-[tool.hatch.envs.types.scripts]
-check = [
-    "mypy {args:src/import_rewriter}",
-    "mypy --explicit-package-bases --ignore-missing-imports tests"
-]
 
 [tool.pytest.ini_options]
 norecursedirs = "tests/resources"
@@ -81,7 +77,4 @@ exclude_lines = [
 "tests/*" = ["INP001", "ARG"]
 
 [tool.ruff]
-exclude = ["tests/resources/"]
-
-[tool.mypy]
-exclude = "tests/resources/"
+exclude = ["tests/resources"]
